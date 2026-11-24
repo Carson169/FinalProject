@@ -43,7 +43,6 @@ public class MainClass extends Application
             DiceGrid.add(DiceLabel[i], i, 0);
         }
 
-
         TextField OptionField = new TextField("Options:");
         OptionField.setEditable(false);
         OptionField.setAlignment(Pos.CENTER);
@@ -67,7 +66,8 @@ public class MainClass extends Application
         }
 
         // Visuals Setup for points and rolls left
-
+        int roundleft = 3;
+        int totalleft = 20;
         TextField PointField = new TextField("Points:");
         PointField.setEditable(false);
         PointField.setAlignment(Pos.CENTER);
@@ -80,10 +80,10 @@ public class MainClass extends Application
         TextField RollsLeft2 = new TextField("RollsLeft (Total):");
         RollsLeft2.setEditable(false);
         RollsLeft2.setAlignment(Pos.CENTER);
-        TextField RollsLeftNumber = new TextField("0");
+        TextField RollsLeftNumber = new TextField(String.valueOf(roundleft));
         RollsLeftNumber.setEditable(false);
         RollsLeftNumber.setAlignment(Pos.CENTER);
-        TextField RollsLeftNumber2 = new TextField("0");
+        TextField RollsLeftNumber2 = new TextField(String.valueOf(totalleft));
         RollsLeftNumber2.setEditable(false);
         RollsLeftNumber2.setAlignment(Pos.CENTER);
         RollsLeftNumber.setPrefWidth(150);
@@ -102,6 +102,22 @@ public class MainClass extends Application
         YahtzeeStage.show();
         
         RollButton.setOnAction(event -> updateDice(dice_symbols, DiceLabel, dice1)); // Runs the updateDice method when the roll button is pressed.
+        RollButton.setOnAction(event -> updateRolls(roundleft, totalleft, RollsLeftNumber, RollsLeftNumber2));
+    }
+    public void updateRolls(int roundleft, int totalleft, TextField RollsLeftNumber, TextField RollsLeftNumber2)
+    {
+        if(roundleft == 0)
+        {
+            totalleft = totalleft - 1;
+            roundleft = 3;
+            RollsLeftNumber.setText(String.valueOf(roundleft));
+            RollsLeftNumber2.setText(String.valueOf(totalleft));
+        }
+        else
+        {
+            roundleft = roundleft - 1;
+            RollsLeftNumber.setText(String.valueOf(roundleft));
+        }
     }
     public static void main(String[] args) // Main Method
     {
@@ -117,7 +133,6 @@ public class MainClass extends Application
         int[] dice_vals = dice1.getResults();
         for (int i = 0; i < 5; i++) 
         {
-
             DiceLabel[i].setText(dice_symbols[dice_vals[i]]);
         }
     }

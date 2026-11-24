@@ -10,7 +10,7 @@ public class dice {
             for(int c=1;c<=5;c++){
                 boolean roll=toRoll[c-1]; //Obtains the boolean for whether or not the current result should be rerolled.
                 if(roll){
-                    results[c-1]=rand.nextInt(1,7);
+                    results[c-1]=rand.nextInt(1,6);
                 }
             }
         }
